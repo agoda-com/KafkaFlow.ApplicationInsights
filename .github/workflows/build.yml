@@ -2,9 +2,9 @@ name: .NET Core Build and Publish
 
 on:
   push:
-    branches: main
+    branches: master
   pull_request:
-    branches: main
+    branches: master
 
 env:
   NETCORE_VERSION: '6.0.x'  
@@ -62,7 +62,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     name: Deploy Packages
     runs-on: ubuntu-latest
     steps:
