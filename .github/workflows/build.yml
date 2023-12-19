@@ -15,7 +15,7 @@ env:
 jobs:
   build:
     name: Build Package 
-    runs-on: windows-latest
+    runs-on: ubuntu​-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -28,22 +28,22 @@ jobs:
       working-directory: ${{ env.GIT_REPO_ROOT }}        
       run: dotnet restore ${{ env.SOLUTION_FILE }}
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1
-
     - name: Build
       working-directory: ${{ env.GIT_REPO_ROOT }}        
       run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Debug --no-restore
 
-    - name: Run Unit Tests and Generate Coverage
-      uses: glennawatson/coverlet-msbuild@v1
-      with:
-        project-files: '**/*Tests.csproj'
-        no-build: true  
-        output-format: cobertura
-        output: results
-        configuration: Debug
-        
+   # - name: Run Unit Tests and Generate Coverage
+   #   uses: glennawatson/coverlet-msbuild@v1
+   #   with:
+   #     project-files: '**/*Tests.csproj'
+   #     no-build: true  
+   #     output-format: cobertura
+   #     output: results
+   #     configuration: Debug
+    - name: run unit test 
+      working-directory: ${{ env.GIT_REPO_ROOT }}
+      run: dotnet test ${{ env.SOLUTION_FILE }} 
+    
     - name: Pack
       working-directory: ${{ env.GIT_REPO_ROOT }}    
       run: dotnet pack ${{ env.SOLUTION_FILE }} --configuration Debug -o finalpackage -p:PackageVersion=${{ env.MAJOR_MINOR_VERSION }}${{ github.run_number }}
