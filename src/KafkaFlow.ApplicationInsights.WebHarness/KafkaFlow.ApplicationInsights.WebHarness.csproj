@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="KafkaFlow.LogHandler.Console" Version="3.0.2" />
+    <PackageReference Include="KafkaFlow.Microsoft.DependencyInjection" Version="3.0.2" />
+    <PackageReference Include="KafkaFlow.Serializer.JsonCore" Version="3.0.2" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KafkaFlow.ApplicationInsights\KafkaFlow.ApplicationInsights.csproj" />
+  </ItemGroup>
+
+</Project>

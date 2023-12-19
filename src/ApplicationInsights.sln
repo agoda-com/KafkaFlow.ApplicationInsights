@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34302.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaFlow.ApplicationInsights", "KafkaFlow.ApplicationInsights\KafkaFlow.ApplicationInsights.csproj", "{BBA8E280-B596-4BBA-874F-A638D3E79799}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaFlow.ApplicationInsights.Tests", "KafkaFlow.ApplicationInsights.Tests\KafkaFlow.ApplicationInsights.Tests.csproj", "{9F90CB49-D968-4021-871F-2314232FB353}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaFlow.ApplicationInsights.WebHarness", "KafkaFlow.ApplicationInsights.WebHarness\KafkaFlow.ApplicationInsights.WebHarness.csproj", "{58A3803D-DCE3-49C9-A7C1-C1481F7E71D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBA8E280-B596-4BBA-874F-A638D3E79799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA8E280-B596-4BBA-874F-A638D3E79799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA8E280-B596-4BBA-874F-A638D3E79799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA8E280-B596-4BBA-874F-A638D3E79799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F90CB49-D968-4021-871F-2314232FB353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F90CB49-D968-4021-871F-2314232FB353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F90CB49-D968-4021-871F-2314232FB353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F90CB49-D968-4021-871F-2314232FB353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58A3803D-DCE3-49C9-A7C1-C1481F7E71D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A3803D-DCE3-49C9-A7C1-C1481F7E71D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A3803D-DCE3-49C9-A7C1-C1481F7E71D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A3803D-DCE3-49C9-A7C1-C1481F7E71D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FF024E1-DEF0-4B6E-AD35-B0047B5C10C0}
+	EndGlobalSection
+EndGlobal
