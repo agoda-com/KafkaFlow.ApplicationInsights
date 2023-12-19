@@ -1,0 +1,1 @@
+# KafkaFlow.ApplicationInsights
