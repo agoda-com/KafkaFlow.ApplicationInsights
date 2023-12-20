@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>      
 	  <IsPackable>true</IsPackable>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-
-  </PropertyGroup>
-
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="KafkaFlow" Version="3.0.2" />
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.14.0" />
   </ItemGroup>
-	
-
+<ItemGroup>
+  <None Include="icon.png" Pack="true" PackagePath="\"/>
+  <None Include="README.md" Pack="true" PackagePath="\"/>
+</ItemGroup>
 </Project>
