@@ -48,8 +48,6 @@
    );
    ```
 
-   Replace `"your-broker-url"` with the URL of your Kafka broker.
-
 ## Documentation
 
 For more detailed information and advanced configuration options, please refer to the [official documentation](#).
