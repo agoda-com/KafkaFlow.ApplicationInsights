@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KafkaFlow.ApplicationInsights.WebHarness\KafkaFlow.ApplicationInsights.WebHarness.csproj" />
-    <ProjectReference Include="..\KafkaFlow.ApplicationInsights\KafkaFlow.ApplicationInsights.csproj" />
+    <ProjectReference Include="..\KafkaFlow.ApplicationInsights\Agoda.KafkaFlow.ApplicationInsights.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

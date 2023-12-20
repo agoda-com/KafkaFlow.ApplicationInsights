@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KafkaFlow.ApplicationInsights\KafkaFlow.ApplicationInsights.csproj" />
+    <ProjectReference Include="..\KafkaFlow.ApplicationInsights\Agoda.KafkaFlow.ApplicationInsights.csproj" />
   </ItemGroup>
 
 </Project>
