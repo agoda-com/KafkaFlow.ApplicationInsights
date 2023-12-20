@@ -46,10 +46,7 @@ jobs:
     
     - name: Pack
       working-directory: ${{ env.GIT_REPO_ROOT }}    
-      run: |
-        cp -v ../README.md KafkaFlow.ApplicationInsights/readme.md
-        ls KafkaFlow.ApplicationInsights
-        dotnet pack ${{ env.SOLUTION_FILE }} --configuration Debug -o finalpackage -p:PackageVersion=${{ env.MAJOR_MINOR_VERSION }}${{ github.run_number }}
+      run: dotnet pack ${{ env.SOLUTION_FILE }} --configuration Debug -o finalpackage -p:PackageVersion=${{ env.MAJOR_MINOR_VERSION }}${{ github.run_number }}
 
     - name: Publish artifact
       uses: actions/upload-artifact@master
