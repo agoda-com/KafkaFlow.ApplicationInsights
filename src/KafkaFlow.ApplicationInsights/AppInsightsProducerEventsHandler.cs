@@ -10,12 +10,14 @@ public class AppInsightsProducerEventsHandler
     public static Task OnProducerStarted(IMessageContext eventContextMessageContext, TelemetryClient telemetryClient)
     {
         eventContextMessageContext.Items.Add("timer", Stopwatch.StartNew());
+        eventContextMessageContext.Items.Add("telemetryClient", telemetryClient); 
         return Task.CompletedTask;
     }
 
-    public static Task OnProducerError(IMessageContext eventContextMessageContext, Exception eventContextException,
-        TelemetryClient telemetryClient)
+    public static Task OnProducerError(IMessageContext eventContextMessageContext, Exception eventContextException)
     {
+        eventContextMessageContext.Items.TryGetValue("telemetryClient", out var telemetryClientOut);
+        var telemetryClient = (TelemetryClient)telemetryClientOut;
         telemetryClient.TrackException(eventContextException, new Dictionary<string, string>()
         {
             {"topic" , eventContextMessageContext.ProducerContext.Topic},
@@ -35,8 +37,10 @@ public class AppInsightsProducerEventsHandler
         return Task.CompletedTask;
     }
 
-    public static Task OnProducerCompleted(IMessageContext eventContextMessageContext, TelemetryClient telemetryClient)
+    public static Task OnProducerCompleted(IMessageContext eventContextMessageContext)
     {
+        eventContextMessageContext.Items.TryGetValue("telemetryClient", out var telemetryClientOut);
+        var telemetryClient = (TelemetryClient)telemetryClientOut;
         eventContextMessageContext.Items.TryGetValue("timer", out var timer);
         var theTimer = (Stopwatch)timer;
         theTimer.Stop();
