@@ -10,7 +10,7 @@ public class AppInsightsProducerEventsHandler
     public static Task OnProducerStarted(IMessageContext eventContextMessageContext, TelemetryClient telemetryClient)
     {
         eventContextMessageContext.Items.Add("timer", Stopwatch.StartNew());
-        eventContextMessageContext.Items.Add("telemetryClient");
+        eventContextMessageContext.Items.Add("telemetryClient", telemetryClient); 
         return Task.CompletedTask;
     }
 
