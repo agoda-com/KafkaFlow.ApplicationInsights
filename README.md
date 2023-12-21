@@ -24,7 +24,7 @@
    Use the following command in the PowerShell to install the KafkaFlow.ApplicationInsights package:
 
    ```powershell
-   dotnet add package KafkaFlow.ApplicationInsights
+   dotnet add package Agoda.KafkaFlow.ApplicationInsights
    ```
 
 2. **Configuration:**
