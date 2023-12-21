@@ -57,6 +57,3 @@ For more detailed information and advanced configuration options, please refer t
 Contributions to "Application Insights for KafkaFlow" are welcome! Please refer to our [contribution guidelines](CONTRIBUTING.md) for more details.
 
 
----
-
-This revised README offers a clearer overview of the project, its features, a more detailed installation guide, and information about contributing and licensing. Adjustments can be made based on your project's specific details and documentation links.
