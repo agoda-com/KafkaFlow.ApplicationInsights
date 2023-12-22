@@ -26,7 +26,7 @@ public class AppInsightsConsumerEventsHandler
         eventContextMessageContext.Items.TryGetValue("timer", out var timer);
         var theTimer = (Stopwatch)timer;
         theTimer.Stop();
-        telemetryClient.TrackKafkaDependency(eventContextMessageContext, "500", false, theTimer.Elapsed);
+        telemetryClient.TrackKafkaDependency(eventContextMessageContext, "Error", false, theTimer.Elapsed);
         return Task.CompletedTask;
     }
 
@@ -38,7 +38,7 @@ public class AppInsightsConsumerEventsHandler
         var theTimer = (Stopwatch)timer;
         theTimer.Stop();
         
-        telemetryClient.TrackKafkaDependency(eventContextMessageContext, "200", true, theTimer.Elapsed);
+        telemetryClient.TrackKafkaDependency(eventContextMessageContext, "Ok", true, theTimer.Elapsed);
         return Task.CompletedTask;
     }
 }
