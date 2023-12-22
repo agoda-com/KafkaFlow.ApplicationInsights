@@ -1,4 +1,5 @@
-﻿using KafkaFlow;
+﻿using System;
+using KafkaFlow;
 using KafkaFlow.Configuration;
 using Microsoft.ApplicationInsights;
 
@@ -30,5 +31,45 @@ public static class ExtensionMethods
         });
 
         return builder;
+    }
+
+    internal static string GetDependencyName(this IMessageContext eventContextMessageContext)
+    {
+        var type = Constants.ConsumerType;
+        if (eventContextMessageContext.ConsumerContext == null)
+        {
+            type = Constants.ProducerType;
+        }
+
+        var topic = eventContextMessageContext.ConsumerContext?.Topic ?? 
+                    eventContextMessageContext.ProducerContext?.Topic;
+
+        var partition = eventContextMessageContext.ConsumerContext?.Partition.ToString() ??
+                        eventContextMessageContext.ProducerContext?.Partition.ToString();
+
+        return $"{type}/{topic}/{partition}";
+    }
+
+    internal static string GetOffset(this IMessageContext eventContextMessageContext)
+    {
+        return eventContextMessageContext.ConsumerContext?.Offset.ToString() ?? eventContextMessageContext.ProducerContext?.Offset.ToString();
+    }
+
+    internal static string GetTarget(this IMessageContext eventContextMessageContext)
+    {
+        return string.Join(",", eventContextMessageContext.Brokers);
+    }
+
+    internal static void TrackKafkaDependency(this TelemetryClient telemetryClient, IMessageContext eventContextMessageContext, string resultCode,
+        bool success, TimeSpan elapsedTime)
+    {
+        telemetryClient.TrackDependency(Constants.DependencyType,
+                                    eventContextMessageContext.GetTarget(),
+                                    eventContextMessageContext.GetDependencyName(),
+                                      eventContextMessageContext.GetOffset(),
+                                      DateTimeOffset.UtcNow,
+                                      elapsedTime,
+                                      resultCode,
+                                      success);
     }
 }
