@@ -62,11 +62,11 @@ internal class MainIntegrationTestFixture
         result.IsSuccessStatusCode.ShouldBeTrue();
         Thread.Sleep(5000);
         dataStore.Count.ShouldBe(7);
-        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).Type == "Kafka" && ((DependencyTelemetry)x).Name.StartsWith("Produce")).ShouldBe(3);
-        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyKind == "Kafka" && ((DependencyTelemetry)x).Name.StartsWith("Produce")).ShouldBe(3);
-        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyTypeName == "Kafka" && ((DependencyTelemetry)x).Name.StartsWith("Produce")).ShouldBe(3);
-        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).Type == "Kafka" && ((DependencyTelemetry)x).Name.StartsWith("Consume")).ShouldBe(3);
-        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyKind == "Kafka" && ((DependencyTelemetry)x).Name.StartsWith("Consume")).ShouldBe(3);
-        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyTypeName == "Kafka" && ((DependencyTelemetry)x).Name.StartsWith("Consume")).ShouldBe(3);
+        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).Type == "Kafka" && ((DependencyTelemetry)x).Data.StartsWith("Produce")).ShouldBe(3);
+        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyKind == "Kafka" && ((DependencyTelemetry)x).Data.StartsWith("Produce")).ShouldBe(3);
+        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyTypeName == "Kafka" && ((DependencyTelemetry)x).Data.StartsWith("Produce")).ShouldBe(3);
+        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).Type == "Kafka" && ((DependencyTelemetry)x).Data.StartsWith("Consume")).ShouldBe(3);
+        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyKind == "Kafka" && ((DependencyTelemetry)x).Data.StartsWith("Consume")).ShouldBe(3);
+        dataStore.Where(y => y is DependencyTelemetry).Count(x => ((DependencyTelemetry)x).DependencyTypeName == "Kafka" && ((DependencyTelemetry)x).Data.StartsWith("Consume")).ShouldBe(3);
     }
 }
