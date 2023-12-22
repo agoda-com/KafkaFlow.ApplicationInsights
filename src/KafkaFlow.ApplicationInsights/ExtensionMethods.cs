@@ -19,15 +19,15 @@ public static class ExtensionMethods
         {
             hub.MessageConsumeStarted.Subscribe(eventContext => AppInsightsConsumerEventsHandler.OnConsumeStarted(eventContext.MessageContext, eventContext.MessageContext.DependencyResolver.Resolve<TelemetryClient>()));
 
-            hub.MessageConsumeError.Subscribe(eventContext => AppInsightsConsumerEventsHandler.OnConsumeError(eventContext.MessageContext, eventContext.Exception, eventContext.MessageContext.DependencyResolver.Resolve<TelemetryClient>()));
+            hub.MessageConsumeError.Subscribe(eventContext => AppInsightsConsumerEventsHandler.OnConsumeError(eventContext.MessageContext, eventContext.Exception));
 
             hub.MessageConsumeCompleted.Subscribe(eventContext => AppInsightsConsumerEventsHandler.OnConsumeCompleted(eventContext.MessageContext));
 
             hub.MessageProduceStarted.Subscribe(eventContext => AppInsightsProducerEventsHandler.OnProducerStarted(eventContext.MessageContext, eventContext.MessageContext.DependencyResolver.Resolve<TelemetryClient>()));
 
-            hub.MessageProduceError.Subscribe(eventContext => AppInsightsProducerEventsHandler.OnProducerError(eventContext.MessageContext, eventContext.Exception, eventContext.MessageContext.DependencyResolver.Resolve<TelemetryClient>()));
+            hub.MessageProduceError.Subscribe(eventContext => AppInsightsProducerEventsHandler.OnProducerError(eventContext.MessageContext, eventContext.Exception));
 
-            hub.MessageProduceCompleted.Subscribe(eventContext => AppInsightsProducerEventsHandler.OnProducerCompleted(eventContext.MessageContext, eventContext.MessageContext.DependencyResolver.Resolve<TelemetryClient>()));
+            hub.MessageProduceCompleted.Subscribe(eventContext => AppInsightsProducerEventsHandler.OnProducerCompleted(eventContext.MessageContext));
         });
 
         return builder;
@@ -73,3 +73,4 @@ public static class ExtensionMethods
                                       success);
     }
 }
+
