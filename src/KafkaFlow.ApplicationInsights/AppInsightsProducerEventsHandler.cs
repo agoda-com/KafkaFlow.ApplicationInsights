@@ -22,7 +22,6 @@ public class AppInsightsProducerEventsHandler
         {
             {"topic" , eventContextMessageContext.ProducerContext.Topic},
             {"partition" , eventContextMessageContext.ProducerContext.Partition.ToString()},
-            {"offset" , eventContextMessageContext.ProducerContext.Offset.ToString()},
         });
         eventContextMessageContext.Items.TryGetValue("timer", out var timer);
         var theTimer = (Stopwatch)timer;

@@ -35,24 +35,22 @@ public static class ExtensionMethods
 
     internal static string GetDependencyName(this IMessageContext eventContextMessageContext)
     {
+        return eventContextMessageContext.ConsumerContext?.Topic ??
+               eventContextMessageContext.ProducerContext?.Topic;
+    }
+
+    internal static string GetData(this IMessageContext eventContextMessageContext)
+    {
         var type = Constants.ConsumerType;
         if (eventContextMessageContext.ConsumerContext == null)
         {
             type = Constants.ProducerType;
         }
 
-        var topic = eventContextMessageContext.ConsumerContext?.Topic ?? 
-                    eventContextMessageContext.ProducerContext?.Topic;
-
         var partition = eventContextMessageContext.ConsumerContext?.Partition.ToString() ??
                         eventContextMessageContext.ProducerContext?.Partition.ToString();
 
-        return $"{type}/{topic}/{partition}";
-    }
-
-    internal static string GetOffset(this IMessageContext eventContextMessageContext)
-    {
-        return eventContextMessageContext.ConsumerContext?.Offset.ToString() ?? eventContextMessageContext.ProducerContext?.Offset.ToString();
+        return $"{type}/{partition}";
     }
 
     internal static string GetTarget(this IMessageContext eventContextMessageContext)
@@ -66,7 +64,7 @@ public static class ExtensionMethods
         telemetryClient.TrackDependency(Constants.DependencyType,
                                     eventContextMessageContext.GetTarget(),
                                     eventContextMessageContext.GetDependencyName(),
-                                      eventContextMessageContext.GetOffset(),
+                                      eventContextMessageContext.GetData(),
                                       DateTimeOffset.UtcNow,
                                       elapsedTime,
                                       resultCode,
