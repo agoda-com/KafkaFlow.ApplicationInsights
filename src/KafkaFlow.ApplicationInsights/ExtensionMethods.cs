@@ -1,4 +1,5 @@
-﻿using KafkaFlow;
+﻿using System;
+using KafkaFlow;
 using KafkaFlow.Configuration;
 using Microsoft.ApplicationInsights;
 
@@ -31,4 +32,43 @@ public static class ExtensionMethods
 
         return builder;
     }
+
+    internal static string GetDependencyName(this IMessageContext eventContextMessageContext)
+    {
+        return eventContextMessageContext.ConsumerContext?.Topic ??
+               eventContextMessageContext.ProducerContext?.Topic;
+    }
+
+    internal static string GetData(this IMessageContext eventContextMessageContext)
+    {
+        var type = Constants.ConsumerType;
+        if (eventContextMessageContext.ConsumerContext == null)
+        {
+            type = Constants.ProducerType;
+        }
+
+        var partition = eventContextMessageContext.ConsumerContext?.Partition.ToString() ??
+                        eventContextMessageContext.ProducerContext?.Partition.ToString();
+
+        return $"{type}/{partition}";
+    }
+
+    internal static string GetTarget(this IMessageContext eventContextMessageContext)
+    {
+        return string.Join(",", eventContextMessageContext.Brokers);
+    }
+
+    internal static void TrackKafkaDependency(this TelemetryClient telemetryClient, IMessageContext eventContextMessageContext, string resultCode,
+        bool success, TimeSpan elapsedTime)
+    {
+        telemetryClient.TrackDependency(Constants.DependencyType,
+                                    eventContextMessageContext.GetTarget(),
+                                    eventContextMessageContext.GetDependencyName(),
+                                      eventContextMessageContext.GetData(),
+                                      DateTimeOffset.UtcNow,
+                                      elapsedTime,
+                                      resultCode,
+                                      success);
+    }
 }
+

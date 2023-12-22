@@ -7,7 +7,7 @@ using Microsoft.ApplicationInsights;
 
 public class AppInsightsProducerEventsHandler
 {
-    public static Task OnProducerStarted(IMessageContext eventContextMessageContext, TelemetryClient telemetryClient)
+    internal static Task OnProducerStarted(IMessageContext eventContextMessageContext, TelemetryClient telemetryClient)
     {
         eventContextMessageContext.Items.Add("timer", Stopwatch.StartNew());
         eventContextMessageContext.Items.Add("telemetryClient", telemetryClient); 
@@ -22,18 +22,12 @@ public class AppInsightsProducerEventsHandler
         {
             {"topic" , eventContextMessageContext.ProducerContext.Topic},
             {"partition" , eventContextMessageContext.ProducerContext.Partition.ToString()},
-            {"offset" , eventContextMessageContext.ProducerContext.Offset.ToString()},
         });
         eventContextMessageContext.Items.TryGetValue("timer", out var timer);
         var theTimer = (Stopwatch)timer;
         theTimer.Stop();
-        var timeComponent = theTimer.ElapsedMilliseconds;
-        telemetryClient.TrackDependency("Kafka-Producer",
-            eventContextMessageContext.ProducerContext.Topic,
-            eventContextMessageContext.ProducerContext.Partition.ToString(),
-            eventContextMessageContext.ProducerContext.Offset.ToString(),
-            DateTimeOffset.UtcNow,
-            theTimer.Elapsed, "500", false);
+
+        telemetryClient.TrackKafkaDependency(eventContextMessageContext, "Error", false, theTimer.Elapsed);
         return Task.CompletedTask;
     }
 
@@ -44,13 +38,8 @@ public class AppInsightsProducerEventsHandler
         eventContextMessageContext.Items.TryGetValue("timer", out var timer);
         var theTimer = (Stopwatch)timer;
         theTimer.Stop();
-        var timeComponent = theTimer.ElapsedMilliseconds;
-        telemetryClient.TrackDependency("Kafka-Producer", 
-            eventContextMessageContext.ProducerContext.Topic, 
-            eventContextMessageContext.ProducerContext.Partition.ToString(),
-            eventContextMessageContext.ProducerContext.Offset.ToString(), 
-            DateTimeOffset.UtcNow, 
-            theTimer.Elapsed, "200", true);
+
+        telemetryClient.TrackKafkaDependency(eventContextMessageContext, "Ok", true, theTimer.Elapsed);
         return Task.CompletedTask;
     }
 }
