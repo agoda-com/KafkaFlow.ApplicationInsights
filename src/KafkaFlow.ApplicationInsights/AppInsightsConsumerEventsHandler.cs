@@ -14,9 +14,10 @@ public class AppInsightsConsumerEventsHandler
         return Task.CompletedTask;
     }
 
-    internal static Task OnConsumeError(IMessageContext eventContextMessageContext, Exception eventContextException,
-        TelemetryClient telemetryClient)
+    public static Task OnConsumeError(IMessageContext eventContextMessageContext, Exception eventContextException)
     {
+        eventContextMessageContext.Items.TryGetValue("telemetryClient", out var telemetryClientOut);
+        var telemetryClient = (TelemetryClient)telemetryClientOut;
         telemetryClient.TrackException(eventContextException, new Dictionary<string, string>()
         {
             {"topic" , eventContextMessageContext.ConsumerContext.Topic},
